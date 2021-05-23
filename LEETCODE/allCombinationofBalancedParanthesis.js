@@ -1,21 +1,20 @@
-    var n=3;
-    const output = [];
-    function dfs(str = '(', left = 1, right = 0) {
-        if (left === n && right === n) {
-            output.push(str);
-            console.log("left == right")
-            console.log(str,left,right)
+var n=3
+var result=[]
+//  [((())),()()(),(()())]
+// BACKTRACKING RECUSRION
+function DFS(str,open,close){
+
+        if(open == n && close == n){
+            result.push(str);
         }
-        if (left + 1 <= n) {
-            console.log("left < = n")
-            console.log(str,left,right)
-            dfs(str + '(', left + 1, right);
+
+        if( open +1 <= n){
+            DFS(str+'(',open+1,close)
         }
-        if (right + 1 <= left) {
-            console.log("right < = left ");
-            console.log(str,left,right)
-            dfs(str + ')', left, right + 1);
+        if(close+1 <=open){
+            DFS(str+')',open,close+1)
         }
-    }
-    dfs();
-    console.log(output)
+}
+
+DFS('(',1,0);
+console.log(result)
