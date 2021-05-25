@@ -1,24 +1,53 @@
-// Classical N-Queen Problem
-// Backtracking &&  Recursion
-//  Place N Queens in NxN board so that no two queens are able to cut each other 
+// N*N Chess Board
+// N queens 
+// Queen can moove in row cloumn diagnol
+// No 2 queens cross/cut each other 
+// Classic 
+// Backtracing
+// recurssion
 
-var n=5
-var arr=Array.from(Array(n),()=>new Array(n).fill(0))
+var n=10
+// 2D array in js
+var arr=Array.from(Array(n),()=>Array(n).fill(0))
 
-if(nQueen(arr,0,n)){
-    for(var i=0;i<n;i++){
-        console.log(arr[i])
+
+function isSafe(arr,row,col,n){
+    for(var i=0;i<row;i++){
+        if(arr[i][col]==1){
+            return false;
+        }
     }
-}
 
-function nQueen(arr,row,n){
+    var r=row
+    var c=col
+    while( r>=0 && c >=0){
+        if(arr[r][c]==1){
+            return false;
+        }
+        r--;
+        c--;
+    }
+    r=row;
+    c=col;
+    while(r>=0 && c<n){
+        if(arr[r][c]==1){
+            return false;
+        }
+        r--;
+        c++;
+    }
+    return true;
+}
+function NQueen(arr,row,n){
+
     if(row >= n){
         return true;
     }
-    for(var col=0;col < n;col++){
+
+    for(var col=0;col<n;col++){
         if(isSafe(arr,row,col,n)){
             arr[row][col]=1;
-            if(nQueen(arr,row+1,n)){
+            if(NQueen(arr,row+1,n)){
                 return true;
             }
             arr[row][col]=0;
@@ -27,29 +56,11 @@ function nQueen(arr,row,n){
     return false;
 }
 
-function isSafe(arr,row,col,n){
-    for(var r=0;r<row;r++){
-        if(arr[r][col] ==1){
-            return false
-        }
+if(NQueen(arr,0,n)){
+    for(var i=0;i<n;i++){
+        console.log(arr[i])
     }
-    var r=row;
-    var c=col;
-    while( r >= 0 && c >=0){
-        if(arr[r][c] ==1){
-            return false;
-        }
-        r--
-        c--
-    }
-    r=row
-    c=col;
-    while(r >=0 && c < n){
-        if(arr[r][c]==1){
-            return false;
-        }
-        r--
-        c++
-    }
-    return true;
+}
+else{
+    console.log("No Right positions")
 }

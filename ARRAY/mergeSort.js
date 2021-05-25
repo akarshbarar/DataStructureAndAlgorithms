@@ -38,17 +38,17 @@ function merge(arr,left,mid,right){
 }
 function mergeSort(arr,left,right){
     
-    if(left<right){
-        var mid=left+(right-left)/2;
+    if(left >=right)return;
+        var mid=left+parseInt((right-left)/2);
         mergeSort(arr,left,mid)
         mergeSort(arr,mid+1,right)
         merge(arr,left,mid,right)
-    }
+    
 
 }
 
 
 
 var arr=[12,11,13,5,6,7]
-mergeSort(arr,0,arr.length)
+mergeSort(arr,0,arr.length-1)
 console.log(arr)
